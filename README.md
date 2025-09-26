@@ -1,36 +1,235 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎓 Dutch Exam Training Platform
 
-## Getting Started
+A modern web application for Dutch high school students to practice VWO Wiskunde B exam questions with AI-powered evaluation and personalized feedback.
 
-First, run the development server:
+[![CI](https://github.com/AafVos/exam-training-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/AafVos/exam-training-platform/actions/workflows/ci.yml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🎯 Project Vision
+
+This platform addresses the gap in affordable exam preparation for Dutch students by providing:
+
+- **AI-Powered Evaluation**: Automated checking of mathematical solutions using Azure AI Foundry
+- **Personalized Learning**: Tag-based skill tracking across 260+ mathematical concepts
+- **Authentic Practice**: Real exam questions from previous VWO Wiskunde B exams
+- **Multi-Modal Input**: Support for photo uploads, text input, and LaTeX expressions
+- **Progress Tracking**: Detailed analytics on student performance per skill area
+
+## 🚀 Tech Stack
+
+### Frontend
+- **Next.js 14+** with App Router and TypeScript
+- **Tailwind CSS** for styling
+- **Radix UI** for accessible component primitives
+- **Zustand** for state management
+- **KaTeX** for mathematical notation rendering
+
+### Backend
+- **Next.js API Routes** (serverless)
+- **Azure Cosmos DB** with SQL API for data storage
+- **Azure AI Foundry** for question categorization and answer evaluation
+- **Azure Blob Storage** for file uploads
+- **Prisma ORM** for type-safe database operations
+
+### Development & Deployment
+- **TypeScript** with strict configuration
+- **Jest** + Testing Library for unit testing
+- **ESLint** for code quality
+- **GitHub Actions** for CI/CD
+- **Vercel** for deployment
+- **Docker** for local development
+
+## 📋 Features (V0 MVP)
+
+### For Students
+- [x] Account creation and authentication
+- [x] Practice session with random questions
+- [x] Multi-modal answer submission (photo/text/LaTeX)
+- [x] AI-powered answer evaluation
+- [x] Per-tag performance scoring
+- [x] Answer history tracking
+
+### For Administrators  
+- [x] PDF upload for exam questions and answers
+- [x] Automatic question extraction and categorization
+- [x] Tag management system
+- [x] Student progress monitoring
+
+## 🏗️ Project Structure
+
+```
+src/
+├── components/
+│   ├── ui/                    # Base UI components (Radix UI)
+│   ├── forms/                 # Form components
+│   ├── math/                  # Math-specific components (LaTeX)
+│   ├── layout/                # Layout components
+│   ├── question/              # Question display and interaction
+│   ├── progress/              # Progress tracking
+│   └── admin/                 # Admin portal components
+├── app/
+│   ├── api/                   # Next.js API routes
+│   ├── auth/                  # Authentication pages
+│   ├── dashboard/             # Student dashboard
+│   ├── practice/              # Practice session pages
+│   └── admin/                 # Admin portal
+├── hooks/                     # Custom React hooks
+├── stores/                    # Zustand state stores
+├── services/                  # API service layer
+├── utils/                     # Utility functions
+└── types/                     # TypeScript definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Development Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Azure account (for cloud services)
+- Git
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Local Development
 
-## Learn More
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/AafVos/exam-training-platform.git
+   cd exam-training-platform
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Set up environment variables**
+   ```bash
+   cp .env.local.example .env.local
+   # Edit .env.local with your Azure credentials
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Generate Prisma client**
+   ```bash
+   npm run db:generate
+   ```
 
-## Deploy on Vercel
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+6. **Open in browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Docker Development
+
+```bash
+# Start with Docker Compose
+npm run docker:up
+
+# Stop containers
+npm run docker:down
+```
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+
+# Type checking
+npm run type-check
+
+# Linting
+npm run lint
+```
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. Connect your GitHub repository to Vercel
+2. Configure environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### Manual Deployment
+
+```bash
+# Build the application
+npm run build
+
+# Start production server
+npm start
+```
+
+## 📊 Database Schema
+
+The application uses Azure Cosmos DB with the following main models:
+
+- **User**: Student and admin accounts
+- **Question**: Exam questions with metadata and tags
+- **Answer**: Official answers with point allocation
+- **StudentAnswer**: Student submissions and evaluations
+- **UserProgress**: Per-tag performance tracking
+
+## 🔧 Configuration
+
+### Environment Variables
+
+```bash
+# Database
+AZURE_COSMOS_CONNECTION_STRING=your-cosmos-connection-string
+AZURE_COSMOS_DATABASE=exam-training
+
+# AI Services  
+AZURE_AI_ENDPOINT=your-ai-endpoint
+AZURE_AI_KEY=your-ai-key
+AZURE_AI_DEPLOYMENT=your-deployment-name
+
+# Storage
+AZURE_STORAGE_CONNECTION_STRING=your-storage-connection
+
+# Authentication
+NEXTAUTH_SECRET=your-secret
+NEXTAUTH_URL=your-app-url
+```
+
+## 🤝 Contributing
+
+This project is part of a portfolio and learning exercise. While not actively seeking contributors, feel free to:
+
+- Report bugs via GitHub Issues
+- Suggest improvements
+- Fork for your own educational use
+
+## 📚 Learning Resources
+
+This project demonstrates:
+
+- **Full-stack TypeScript development**
+- **Modern React patterns with Next.js 14+**
+- **Azure cloud integration**
+- **AI/ML integration for education**
+- **Database design for educational platforms**
+- **CI/CD with GitHub Actions**
+
+## 📄 License
+
+This project is for educational purposes. See [LICENSE](LICENSE) for details.
+
+## 🙋‍♂️ Author
+
+**AafVos** - [GitHub](https://github.com/AafVos)
+
+Built as part of a comprehensive full-stack development portfolio, showcasing modern web development practices and cloud integration.
+
+---
+
+*This project aims to make quality exam preparation accessible to all Dutch students, regardless of economic background.*
