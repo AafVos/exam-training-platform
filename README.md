@@ -28,10 +28,10 @@ This platform addresses the gap in affordable exam preparation for Dutch student
 
 ### Backend
 - **Next.js API Routes** (serverless)
-- **Azure Cosmos DB** with SQL API for data storage
+- **Azure Cosmos DB** with direct SQL API integration for data storage
 - **Azure AI Foundry** for question categorization and answer evaluation
 - **Azure Blob Storage** for file uploads
-- **Prisma ORM** for type-safe database operations
+- **Azure Cosmos DB SDK** for type-safe database operations
 
 ### Development & Deployment
 - **TypeScript** with strict configuration
@@ -109,17 +109,12 @@ src/
    # Edit .env.local with your Azure credentials
    ```
 
-4. **Generate Prisma client**
-   ```bash
-   npm run db:generate
-   ```
-
-5. **Run the development server**
+4. **Run the development server**
    ```bash
    npm run dev
    ```
 
-6. **Open in browser**
+5. **Open in browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ### Docker Development
@@ -171,13 +166,13 @@ npm start
 
 ## 📊 Database Schema
 
-The application uses Azure Cosmos DB with the following main models:
+The application uses Azure Cosmos DB with direct SDK integration and the following main models:
 
-- **User**: Student and admin accounts
-- **Question**: Exam questions with metadata and tags
-- **Answer**: Official answers with point allocation
-- **StudentAnswer**: Student submissions and evaluations
-- **UserProgress**: Per-tag performance tracking
+- **User**: Student and admin accounts with email verification
+- **Question**: Exam questions with metadata and AI-assigned tags
+- **Answer**: Official answers with point allocation criteria
+- **StudentAnswer**: Student submissions and AI evaluations
+- **UserProgress**: Per-tag performance tracking with binary scoring
 
 ## 🔧 Configuration
 
@@ -185,8 +180,9 @@ The application uses Azure Cosmos DB with the following main models:
 
 ```bash
 # Database
-AZURE_COSMOS_CONNECTION_STRING=your-cosmos-connection-string
-AZURE_COSMOS_DATABASE=exam-training
+AZURE_COSMOS_ENDPOINT=https://your-cosmos-account.documents.azure.com:443/
+AZURE_COSMOS_KEY=your-cosmos-key
+AZURE_COSMOS_DATABASE=projectAaf
 
 # AI Services  
 AZURE_AI_ENDPOINT=your-ai-endpoint

@@ -7,18 +7,22 @@ describe('Type Definitions', () => {
         id: '1',
         email: 'test@example.com',
         name: 'Test User',
+        password: 'hashedpassword123',
         role: 'STUDENT',
         vwoLevel: 'VWO',
-        createdAt: new Date(),
-        lastLoginAt: new Date(),
+        subject: 'Wiskunde B',
+        createdAt: new Date().toISOString(),
+        lastLoginAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       }
 
       expect(user.id).toBeDefined()
       expect(user.email).toBeDefined()
       expect(user.name).toBeDefined()
       expect(user.role).toBeDefined()
-      expect(user.createdAt).toBeInstanceOf(Date)
-      expect(user.lastLoginAt).toBeInstanceOf(Date)
+      expect(typeof user.createdAt).toBe('string')
+      expect(typeof user.lastLoginAt).toBe('string')
+      expect(typeof user.updatedAt).toBe('string')
     })
 
     it('should allow optional vwoLevel', () => {
@@ -26,9 +30,12 @@ describe('Type Definitions', () => {
         id: '1',
         email: 'test@example.com',
         name: 'Test User',
+        password: 'hashedpassword123',
         role: 'ADMIN',
-        createdAt: new Date(),
-        lastLoginAt: new Date(),
+        subject: 'Wiskunde B',
+        createdAt: new Date().toISOString(),
+        lastLoginAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       }
 
       expect(user.vwoLevel).toBeUndefined()

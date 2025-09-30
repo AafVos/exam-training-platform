@@ -3,10 +3,15 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  password: string;
   role: 'STUDENT' | 'ADMIN';
   vwoLevel?: string;
-  createdAt: Date;
-  lastLoginAt: Date;
+  subject: string;
+  emailVerified?: string | null; // ISO string or null
+  emailVerifyToken?: string;
+  createdAt: string; // ISO string
+  lastLoginAt: string; // ISO string  
+  updatedAt: string; // ISO string
 }
 
 export interface Question {
@@ -65,6 +70,22 @@ export interface RegisterForm {
   email: string;
   password: string;
   vwoLevel: string;
+  subject?: string;
+}
+
+// Registration-specific types
+export interface RegistrationData {
+  email: string;
+  password: string;
+  name: string;
+  vwoLevel: string;
+}
+
+export interface RegistrationResponse {
+  success: boolean;
+  user?: Omit<User, 'password'>;
+  message?: string;
+  error?: string;
 }
 
 export interface AnswerSubmissionForm {

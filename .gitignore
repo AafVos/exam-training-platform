@@ -36,9 +36,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# prisma
-/prisma/migrations
-/src/generated
+# Azure Cosmos DB (no local files to ignore)
 
 # IDE
 .vscode/
